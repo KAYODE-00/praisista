@@ -8,122 +8,57 @@
    - Environments: .env
 
  ✓ Starting...
- ✓ Ready in 5.6s
+ ✓ Ready in 7.1s
+ ○ Compiling /api/auth/[...all] ...
+ ✓ Compiled /api/auth/[...all] in 5.6s (920 modules)
+ GET /api/auth/get-session 200 in 9163ms
+ POST /api/auth/sign-up/email 200 in 3183ms
+ GET /api/auth/get-session 200 in 523ms
+ POST /api/auth/sign-up/email 422 in 2437ms
+ ○ Compiling /api/chat ...
+ ✓ Compiled /api/chat in 2.9s (1019 modules)
+(node:18204) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+chat route error: Error: 404 {"error":{"message":"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.","type":"invalid_request_error","code":"model_not_found"}}
+    at async getBirthdayAIResponse (lib\ai.ts:18:22)
+    at async POST (app\api\chat\route.tsx:52:19)
+  16 | `;
+  17 |
+> 18 |   const completion = await groq.chat.completions.create({
+     |                      ^
+  19 |     model: "llama-3.3-70b-versatile",
+  20 |     temperature: 0.8,
+  21 |     max_tokens: 180, {
+  status: 404,
+  headers: [Object],
+  error: [Object]
+}
+ POST /api/chat 502 in 4097ms
+ ✓ Compiled in 90ms
+ ✓ Compiled /api/chat in 430ms (185 modules)
+ POST /api/chat 200 in 3891ms
  ○ Compiling / ...
- ✓ Compiled / in 15.8s (1431 modules)
- GET / 200 in 17202ms
+ ✓ Compiled / in 8s (1432 modules)
+ GET / 200 in 2691ms
  ○ Compiling /room ...
- ✓ Compiled /room in 3.1s (1535 modules)
- GET /room 200 in 3508ms
- GET /room 200 in 177ms
- GET /room 200 in 190ms
- GET /room 200 in 127ms
- GET /room 200 in 104ms
+ ✓ Compiled /room in 3.3s (1522 modules)
+ GET /room 200 in 4662ms
  ○ Compiling /api/auth/[...all] ...
- ✓ Compiled /api/auth/[...all] in 4.9s (2159 modules)
-2026-09-26T03:07:58.522Z ERROR [Better Auth]: Could not validate the database schema. Check your database connection.
-[Error: getaddrinfo ENOTFOUND base] {
-  errno: -3008,
-  code: 'ENOTFOUND',
-  syscall: 'getaddrinfo',
-  hostname: 'base'
-}
- GET /api/auth/get-session 500 in 9313ms
- ✓ Compiled in 5.5s (1536 modules)
- ✓ Compiled in 3.3s (1536 modules)
- GET / 200 in 2894ms
- GET / 200 in 166ms
-   Reload env: .env
- ✓ Compiled in 2.4s (1522 modules)
- GET / 200 in 783ms
- ✓ Compiled in 4.2s (1536 modules)
- GET / 200 in 2338ms
- ✓ Compiled in 2.1s (1536 modules)
- GET / 200 in 747ms
- GET /room 200 in 823ms
- ○ Compiling /api/auth/[...all] ...
- ✓ Compiled /api/auth/[...all] in 1981ms (1461 modules)
- GET /room 200 in 1179ms
-2026-09-26T03:16:08.705Z ERROR [Better Auth]: Could not validate the database schema. Check your database connection.
-[Error: getaddrinfo ENOTFOUND base] {
-  errno: -3008,
-  code: 'ENOTFOUND',
-  syscall: 'getaddrinfo',
-  hostname: 'base'
-}
- GET /api/auth/get-session 500 in 5431ms
-   Reload env: .env
- ✓ Compiled in 2.2s (2164 modules)
-   Reload env: .env
- GET /room 200 in 408ms
- ✓ Compiled in 770ms (2150 modules)
- GET /room 200 in 179ms
-2026-09-26T03:16:55.164Z ERROR [Better Auth]: Could not validate the database schema. Check your database connection.
-[Error: getaddrinfo ENOTFOUND base] {
-  errno: -3008,
-  code: 'ENOTFOUND',
-  syscall: 'getaddrinfo',
-  hostname: 'base'
-}
- GET /api/auth/get-session 500 in 3202ms
-[Error: getaddrinfo ENOTFOUND base] {
-  errno: -3008,
-  code: 'ENOTFOUND',
-  syscall: 'getaddrinfo',
-  hostname: 'base'
-}
- POST /api/auth/sign-up/email 500 in 2507ms
-[Error: getaddrinfo ENOTFOUND base] {
-  errno: -3008,
-  code: 'ENOTFOUND',
-  syscall: 'getaddrinfo',
-  hostname: 'base'
-}
- POST /api/auth/sign-up/email 500 in 2513ms
- ✓ Compiled in 1425ms (703 modules)
- GET /room 200 in 227ms
- ✓ Compiled in 807ms (703 modules)
- ✓ Compiled in 863ms (703 modules)
- ✓ Compiled in 2.6s (1536 modules)
- ○ Compiling /api/auth/[...all] ...
- ✓ Compiled /api/auth/[...all] in 2.2s (1462 modules)
-(node:7704) Warning: SECURITY WARNING: The SSL modes 'prefer', 'require', and 'verify-ca' are treated as aliases for 'verify-full'.
-In the next major version (pg-connection-string v3.0.0 and pg v9.0.0), these modes will adopt standard libpq semantics, which have weaker security guarantees.
-
-To prepare for this change:
-- If you want the current behavior, explicitly use 'sslmode=verify-full'
-- If you want libpq compatibility now, use 'uselibpqcompat=true&sslmode=require'
-
-See https://www.postgresql.org/docs/current/libpq-ssl.html for libpq SSL mode definitions.
-(Use `node --trace-warnings ...` to show where the warning was created)
-2026-09-26T03:19:09.679Z ERROR [Better Auth]: Could not validate the database schema. Check your database connection.
-[error: password authentication failed for user 'neondb_owner'] {
-  length: 75,
-  severity: 'ERROR',
-  code: '28P01',
-  detail: undefined,
-  hint: undefined,
-  position: undefined,
-  internalPosition: undefined,
-  internalQuery: undefined,
-  where: undefined,
-  schema: undefined,
-  table: undefined,
-  column: undefined,
-  dataType: undefined,
-  constraint: undefined,
-  file: undefined,
-  line: undefined,
-  routine: undefined
-}
- GET /api/auth/get-session 500 in 5685ms
-(node:17076) Warning: SECURITY WARNING: The SSL modes 'prefer', 'require', and 'verify-ca' are treated as aliases for 'verify-full'.
-In the next major version (pg-connection-string v3.0.0 and pg v9.0.0), these modes will adopt standard libpq semantics, which have weaker security guarantees.
-
-To prepare for this change:
-- If you want the current behavior, explicitly use 'sslmode=verify-full'
-- If you want libpq compatibility now, use 'uselibpqcompat=true&sslmode=require'
-
-See https://www.postgresql.org/docs/current/libpq-ssl.html for libpq SSL mode definitions.
-(Use `node --trace-warnings ...` to show where the warning was created)
-[?25h
+ ✓ Compiled /api/auth/[...all] in 2.1s (1478 modules)
+ GET /api/auth/get-session 200 in 6313ms
+ GET /room 200 in 2359ms
+ GET /api/auth/get-session 200 in 73ms
+ ✓ Compiled in 4.3s (2181 modules)
+ GET /room 200 in 1548ms
+ GET /room 200 in 1583ms
+ ✓ Compiled in 2.9s (2181 modules)
+ GET /room 200 in 1450ms
+ GET /room 200 in 1503ms
+ POST /api/auth/sign-up/email 422 in 3658ms
+ POST /api/auth/sign-up/email 200 in 4082ms
+ GET /api/auth/get-session 200 in 697ms
+ ○ Compiling /api/chat ...
+ ✓ Compiled /api/chat in 1395ms (1557 modules)
+ POST /api/chat 200 in 4818ms
+ GET /room 200 in 761ms
+ GET /api/auth/get-session 200 in 3452ms

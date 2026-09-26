@@ -14,7 +14,7 @@ export function getDatabaseUrl() {
     throw new Error("DATABASE_URL must begin with postgresql://.");
   }
 
-  const sslmode = url.searchParams.get("sslmode") ?? "require";
+  const sslmode = url.searchParams.get("sslmode") === "require" ? "verify-full" : (url.searchParams.get("sslmode") ?? "verify-full");
   const channelBinding = url.searchParams.get("channel_binding");
   url.search = "";
   url.searchParams.set("sslmode", sslmode);

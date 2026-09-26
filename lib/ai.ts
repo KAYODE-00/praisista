@@ -16,7 +16,7 @@ Keep responses concise and natural, usually 1-3 sentences.
 `;
 
   const completion = await groq.chat.completions.create({
-    model: "llama-3.3-70b-versatile",
+    model: process.env.GROQ_MODEL ?? "openai/gpt-oss-120b",
     temperature: 0.8,
     max_tokens: 180,
     messages: [

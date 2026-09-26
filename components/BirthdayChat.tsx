@@ -18,7 +18,7 @@ function getChatSessionId() {
   return sessionId;
 }
 
-export default function BirthdayChat({ onClose }: { onClose: () => void }) {
+export default function BirthdayChat({ onClose, userName }: { onClose: () => void; userName?: string }) {
   const [messages, setMessages] = useState<ChatMessage[]>([
     { role: "assistant", content: "Hi, I'm Sugar 🍰 — I heard someone's having a birthday. What's the vibe today?" },
   ]);
@@ -76,7 +76,7 @@ export default function BirthdayChat({ onClose }: { onClose: () => void }) {
       <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
         <div className="flex items-center gap-2 text-[var(--gold)]">
           <Cake size={16} />
-          <span className="text-xs uppercase tracking-[.25em]">{AI_NAME}</span>
+          <span className="text-xs uppercase tracking-[.25em]">Birthday chat</span>
         </div>
         <button onClick={onClose} className="text-white/35 transition hover:text-white/70" aria-label="Close chat">
           <X size={16} />
@@ -93,6 +93,9 @@ export default function BirthdayChat({ onClose }: { onClose: () => void }) {
                 : "self-start bg-white/[.06] text-white/80"
             }`}
           >
+            <p className="mb-1 text-[10px] font-semibold uppercase tracking-[.16em] opacity-55">
+              {m.role === "assistant" ? AI_NAME : userName?.trim() || "You"}
+            </p>
             {m.content}
           </div>
         ))}
