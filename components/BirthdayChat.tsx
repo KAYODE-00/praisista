@@ -186,7 +186,7 @@ export default function BirthdayChat({
                 }
               }}
               rows={1}
-              placeholder="Write to the group…"
+              placeholder="write…"
               className="max-h-24 min-w-0 flex-1 resize-none rounded-2xl bg-white/[.05] px-4 py-2.5 text-sm text-white outline-none placeholder:text-white/30 focus:bg-white/[.08] whitespace-pre-wrap"
             />
 
