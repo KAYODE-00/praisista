@@ -4,7 +4,20 @@ import { Resend } from "resend";
 import { getDatabaseUrl } from "@/lib/database-url";
 
 const pool = new Pool({ connectionString: getDatabaseUrl() });
-const baseURL = process.env.BETTER_AUTH_URL ?? "http://localhost:3000";
+
+function getBaseUrl() {
+  const configured = process.env.BETTER_AUTH_URL;
+  if (configured) {
+    try {
+      return new URL(configured).origin;
+    } catch {
+      console.warn("Ignoring invalid BETTER_AUTH_URL; using the deployment URL instead.");
+    }
+  }
+  return process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000";
+}
+
+const baseURL = getBaseUrl();
 
 export const auth = betterAuth({
   database: pool,
