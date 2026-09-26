@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import Link from "next/link";
 import Gallery from "@/components/Gallery";
+import BirthdayChat from "@/components/BirthdayChat";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   Cake,
@@ -133,6 +133,7 @@ export default function BirthdayExperience() {
   const [entered, setEntered] = useState(false);
   const [soundOn, setSoundOn] = useState(true);
   const [showMessage, setShowMessage] = useState(false);
+  const [showChat, setShowChat] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const target = getBirthdayTarget(now);
@@ -214,7 +215,7 @@ export default function BirthdayExperience() {
                 transition={{ delay: 0.2 }}
                 className="mb-3 text-xs uppercase tracking-[.35em] text-[var(--gold)]/70"
               >
-                A little surprise, baking
+                A birthday moment, waiting
               </motion.p>
 
               <motion.h1
@@ -277,7 +278,7 @@ export default function BirthdayExperience() {
                 >
                   <span className="absolute inset-0 -translate-x-full bg-white/20 transition-transform duration-700 group-hover:translate-x-full" />
                   <Sparkles size={17} />
-                  Open your surprise
+                  Enter your birthday space
                   <ArrowRight
                     size={17}
                     className="transition-transform group-hover:translate-x-1"
@@ -360,13 +361,13 @@ export default function BirthdayExperience() {
                     className="transition-transform group-hover:translate-x-1"
                   />
                 </button>
-                <Link
-                  href="/room"
+                <button
+                  onClick={() => setShowChat((value) => !value)}
                   className="group inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[.04] px-6 py-3 text-sm text-white/70 backdrop-blur transition hover:bg-white/[.08]"
                 >
                   <MessageCircleHeart size={16} />
-                  Enter our private room
-                </Link>
+                  {showChat ? "Close birthday chat" : "Enter birthday chat"}
+                </button>
                 <button
                   onClick={() => setSoundOn((v) => !v)}
                   className="text-xs text-white/30 hover:text-white/60"
@@ -374,6 +375,9 @@ export default function BirthdayExperience() {
                   {soundOn ? "Mute birthday song" : "Turn birthday song on"}
                 </button>
               </motion.div>
+              <AnimatePresence>
+                {showChat && <BirthdayChat onClose={() => setShowChat(false)} />}
+              </AnimatePresence>
               <AnimatePresence>
                 {showMessage && (
                   <motion.div

@@ -474,3 +474,117 @@ Import trace for requested module:
  GET /room 500 in 92213ms
  GET /room 500 in 110036ms
  ○ Compiling /_error ...
+ ✓ Compiled /_error in 97.5s (2517 modules)
+ GET /admin 500 in 138419ms
+ GET /room 500 in 125402ms
+ GET /room 500 in 45609ms
+ GET /room 200 in 1728ms
+ GET /room 200 in 1236ms
+ GET /room 200 in 124ms
+ GET /room 200 in 133ms
+ GET /room 200 in 643ms
+ GET /admin 200 in 4386ms
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\Admin\Downloads\praisista\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'C:\Users\Admin\Downloads\praisista\.next\cache\webpack\client-development-fallback\0.pack.gz'
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\Admin\Downloads\praisista\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'C:\Users\Admin\Downloads\praisista\.next\cache\webpack\client-development-fallback\0.pack.gz'
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\Admin\Downloads\praisista\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'C:\Users\Admin\Downloads\praisista\.next\cache\webpack\client-development-fallback\0.pack.gz'
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\Admin\Downloads\praisista\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'C:\Users\Admin\Downloads\praisista\.next\cache\webpack\client-development-fallback\0.pack.gz'
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\Admin\Downloads\praisista\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'C:\Users\Admin\Downloads\praisista\.next\cache\webpack\client-development-fallback\0.pack.gz'
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ ○ Compiling /api/auth/[...all] ...
+ ✓ Compiled /api/auth/[...all] in 819ms (1684 modules)
+ GET /admin 200 in 4067ms
+ GET /admin 200 in 4701ms
+ GET /admin 200 in 4013ms
+ GET /room 200 in 2483ms
+ ○ Compiling /api/gallery ...
+ GET /api/auth/get-session 200 in 7351ms
+ ✓ Compiled /api/gallery in 5s (1700 modules)
+ GET /api/gallery 200 in 8294ms
+ GET /api/auth/get-session 200 in 5548ms
+ GET /room 200 in 535ms
+ GET /api/auth/get-session 200 in 2931ms
+ GET /api/auth/get-session 200 in 557ms
+ GET /room 200 in 178ms
+ GET /api/auth/get-session 200 in 548ms
+ GET /api/gallery 200 in 989ms
+ GET /api/gallery 200 in 320ms
+ GET /room 200 in 166ms
+ GET /room 200 in 68ms
+ GET /room 200 in 63ms
+ ✓ Compiled in 47s (2443 modules)
+ GET /room 200 in 2153ms
+ GET /room 200 in 2170ms
+ GET /room 200 in 562ms
+ ○ Compiling /api/gallery ...
+ ✓ Compiled /api/gallery in 3.3s (1607 modules)
+ GET /api/gallery 200 in 7795ms
+ GET /api/gallery 200 in 389ms
+ ○ Compiling /api/chat ...
+ ✓ Compiled /api/chat in 28.8s (1687 modules)
+ GET /api/chat 200 in 35427ms
+ GET /api/chat 200 in 45146ms
+ POST /api/chat 200 in 35351ms
+ GET /api/chat 200 in 35365ms
+ GET /api/chat 200 in 44776ms
+ GET /api/chat 200 in 2405ms
+ GET /api/chat 200 in 2384ms
+ GET /api/chat 200 in 47731ms
+ GET /api/chat 200 in 2391ms
+ GET /api/chat 200 in 2949ms
+ GET /api/chat 200 in 1522ms
+ GET /api/chat 200 in 6645ms
+ GET /api/chat 200 in 8261ms
+ GET /api/chat 200 in 9651ms
+ GET /api/chat 200 in 10002ms
+ ✓ Compiled in 27.6s (2542 modules)
+ GET /room 200 in 1396ms
+ GET /api/chat 200 in 20428ms
+ GET /api/chat 200 in 20603ms
+ GET /api/chat 200 in 17049ms
+ GET /api/chat 200 in 17100ms
+ GET /api/chat 200 in 21103ms
+ GET /api/chat 200 in 18954ms
+ GET /api/chat 200 in 824ms
+ GET /api/chat 200 in 834ms
+ GET /api/chat 200 in 827ms
+ GET /api/chat 200 in 883ms
+ GET /api/chat 200 in 806ms
+ GET /room 200 in 153ms
+ GET /api/chat 200 in 803ms
+ GET /api/chat 200 in 819ms
+ GET /api/chat 200 in 850ms
+ GET /room 200 in 123ms
+ GET /api/chat 200 in 884ms
+ GET /api/chat 200 in 933ms
+ GET /api/chat 200 in 919ms
+ GET /api/chat 200 in 903ms
+ GET /api/chat 200 in 902ms
+ GET /api/chat 200 in 933ms
+ GET /api/chat 200 in 802ms
+ GET /api/chat 200 in 1285ms
+ ✓ Compiled in 6.2s (2539 modules)
+ GET /room 200 in 300ms
+ GET /room 200 in 105ms
+ GET /room 200 in 123ms
+ GET /api/chat 200 in 5001ms
+ GET /api/chat 200 in 4000ms
+ GET /api/chat 200 in 2745ms
+ GET /api/chat 200 in 790ms
+ GET /api/chat 200 in 806ms
+ GET /api/chat 200 in 792ms
+ GET /api/chat 200 in 830ms
+ GET /api/chat 200 in 800ms
+ GET /api/chat 200 in 816ms
+ GET /api/chat 200 in 843ms
+ GET /api/chat 200 in 825ms
+ GET /api/chat 200 in 802ms
+ GET /api/chat 200 in 818ms
+ GET /api/chat 200 in 815ms
+ GET /api/chat 200 in 813ms
+ GET /api/chat 200 in 863ms
+ GET /api/chat 200 in 815ms
+ GET /api/chat 200 in 794ms
+ GET /api/chat 200 in 834ms
+ GET /api/chat 200 in 820ms
+ GET /api/chat 200 in 798ms
+ GET /api/chat 200 in 817ms
