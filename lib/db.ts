@@ -1,11 +1,10 @@
 import { neon } from "@neondatabase/serverless";
+import { getDatabaseUrl } from "@/lib/database-url";
 
 type ChatRole = "user" | "assistant";
 
 function getSql() {
-  const databaseUrl = process.env.DATABASE_URL;
-  if (!databaseUrl) throw new Error("DATABASE_URL is not configured.");
-  return neon(databaseUrl);
+  return neon(getDatabaseUrl());
 }
 
 let schemaReady: Promise<void> | undefined;

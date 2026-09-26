@@ -1,11 +1,8 @@
 import { betterAuth } from "better-auth";
 import { Pool } from "pg";
+import { getDatabaseUrl } from "@/lib/database-url";
 
-const databaseUrl = process.env.DATABASE_URL;
-
-if (!databaseUrl) throw new Error("DATABASE_URL is required for authentication.");
-
-const pool = new Pool({ connectionString: databaseUrl });
+const pool = new Pool({ connectionString: getDatabaseUrl() });
 
 export const auth = betterAuth({
   database: pool,

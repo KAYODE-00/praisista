@@ -174,18 +174,11 @@ export default function BirthdayExperience() {
     return () => window.clearTimeout(fadeTimer);
   }, [entered, isBirthday, soundOn]);
 
-  const enter = () => {
-    setEntered(true);
-    if (isBirthday && soundOn) {
-      setTimeout(() => audioRef.current?.play().catch(() => {}), 50);
-    }
-  };
+  const enter = () => window.location.assign("/room");
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[var(--bg)]">
-      {birthdayAudioEnabled && (
-        <audio ref={audioRef} src="/audio/happy-birthday.mp3" preload="auto" />
-      )}
+      {birthdayAudioEnabled && <audio ref={audioRef} loop src="/audio/happy-birthday.mp3" preload="auto" />}
 
       <FloatingTreats />
       <div className="noise pointer-events-none fixed inset-0 opacity-30" />
