@@ -1510,3 +1510,10 @@ Require stack:
  ✓ Compiled in 11.4s (2569 modules)
  ✓ Compiled in 16.4s (2468 modules)
  ✓ Compiled in 2.1s (2468 modules)
+ ✓ Compiled in 237ms (855 modules)
+ GET /room 200 in 3658ms
+ ○ Compiling /icon ...
+ ✓ Compiled /icon in 5.3s (1631 modules)
+ GET /icon?7c0e0aa7205e44b7 200 in 5682ms
+ ✓ Compiled in 7.9s (2468 modules)
+ ✓ Compiled in 2.3s (2468 modules)

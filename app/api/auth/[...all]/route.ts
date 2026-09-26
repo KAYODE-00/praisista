@@ -17,5 +17,7 @@ export async function POST(request: Request) {
   delete body.inviteCode;
   const headers = new Headers(request.headers);
   headers.delete("content-length");
+  const origin = request.headers.get("origin") ?? new URL(request.url).origin;
+  if (origin) headers.set("origin", origin);
   return auth.handler(new Request(request.url, { method: "POST", headers, body: JSON.stringify(body) }));
 }

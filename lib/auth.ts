@@ -27,6 +27,7 @@ function getBaseUrl() {
     process.env.NEXTAUTH_URL,
     process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined,
     "http://localhost:3000",
+    "http://127.0.0.1:3000",
   ];
 
   for (const candidate of candidates) {
@@ -45,7 +46,30 @@ function getBaseUrl() {
   return "http://localhost:3000";
 }
 
+function getTrustedOrigins() {
+  const origins = new Set<string>([
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "https://localhost:3000",
+    "https://127.0.0.1:3000",
+  ]);
+
+  const base = getBaseUrl();
+  if (base) origins.add(base);
+
+  const extra = process.env.BETTER_AUTH_TRUSTED_ORIGINS;
+  if (extra) {
+    for (const origin of extra.split(",")) {
+      const value = origin.trim();
+      if (value) origins.add(value);
+    }
+  }
+
+  return Array.from(origins);
+}
+
 const baseURL = getBaseUrl();
+const trustedOrigins = getTrustedOrigins();
 
 export const auth = betterAuth({
   database: pool,
@@ -67,5 +91,5 @@ export const auth = betterAuth({
   },
   secret: getAuthSecret(),
   baseURL,
-  trustedOrigins: Array.from(new Set(["http://localhost:3000", "http://127.0.0.1:3000", baseURL])),
+  trustedOrigins,
 });
