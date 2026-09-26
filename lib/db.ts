@@ -1,7 +1,13 @@
 import { neon } from "@neondatabase/serverless";
 import { getDatabaseUrl } from "@/lib/database-url";
 
-type ChatRole = "user" | "assistant";
+export type GroupMessage = {
+  id: number;
+  authorName: string;
+  role: "user" | "assistant";
+  content: string;
+  createdAt: string;
+};
 
 function getSql() {
   return neon(getDatabaseUrl());
@@ -13,28 +19,41 @@ async function ensureChatSchema() {
   if (!schemaReady) {
     const sql = getSql();
     schemaReady = sql`
-      CREATE TABLE IF NOT EXISTS birthday_chat_messages (
+      CREATE TABLE IF NOT EXISTS birthday_group_messages (
         id BIGSERIAL PRIMARY KEY,
-        session_id UUID NOT NULL,
+        author_id TEXT NOT NULL,
+        author_name TEXT NOT NULL,
         role TEXT NOT NULL CHECK (role IN ('user', 'assistant')),
         content TEXT NOT NULL,
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       )
     `.then(() => undefined);
   }
-
   return schemaReady;
 }
 
-export async function saveChatMessage(input: {
-  sessionId: string;
-  role: ChatRole;
-  content: string;
-}) {
+export async function listGroupMessages() {
   await ensureChatSchema();
   const sql = getSql();
-  await sql`
-    INSERT INTO birthday_chat_messages (session_id, role, content)
-    VALUES (${input.sessionId}, ${input.role}, ${input.content})
+  const rows = await sql`
+    SELECT id, author_name, role, content, created_at
+    FROM birthday_group_messages
+    ORDER BY id DESC
+    LIMIT 100
   `;
+  return rows.reverse().map((row) => ({
+    id: Number(row.id), authorName: String(row.author_name), role: row.role === "assistant" ? "assistant" : "user", content: String(row.content), createdAt: new Date(String(row.created_at)).toISOString(),
+  })) as GroupMessage[];
+}
+
+export async function saveGroupMessage(input: { authorId: string; authorName: string; role: "user" | "assistant"; content: string }) {
+  await ensureChatSchema();
+  const sql = getSql();
+  const rows = await sql`
+    INSERT INTO birthday_group_messages (author_id, author_name, role, content)
+    VALUES (${input.authorId}, ${input.authorName}, ${input.role}, ${input.content})
+    RETURNING id, author_name, role, content, created_at
+  `;
+  const row = rows[0];
+  return { id: Number(row.id), authorName: String(row.author_name), role: row.role === "assistant" ? "assistant" : "user", content: String(row.content), createdAt: new Date(String(row.created_at)).toISOString() } as GroupMessage;
 }

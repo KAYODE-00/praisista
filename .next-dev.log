@@ -62,3 +62,173 @@ chat route error: Error: 404 {"error":{"message":"The model `llama-3.3-70b-versa
  POST /api/chat 200 in 4818ms
  GET /room 200 in 761ms
  GET /api/auth/get-session 200 in 3452ms
+ ✓ Compiled in 2.2s (703 modules)
+ ✓ Compiled in 1394ms (819 modules)
+ GET /room 200 in 3349ms
+ ✓ Compiled in 634ms (703 modules)
+ GET /room 200 in 647ms
+ GET /room 200 in 80ms
+ GET /room 200 in 131ms
+ GET /room 200 in 896ms
+ GET /room 200 in 874ms
+ ✓ Compiled in 2.6s (1522 modules)
+ GET /room 200 in 1520ms
+ GET /room 200 in 1549ms
+ GET /room 200 in 914ms
+ GET /room 200 in 850ms
+ ✓ Compiled in 2.6s (1522 modules)
+ GET /room 200 in 471ms
+ GET /room 200 in 493ms
+ ○ Compiling / ...
+ ✓ Compiled / in 1256ms (833 modules)
+ GET / 200 in 4034ms
+ GET / 200 in 366ms
+ ⨯ ./components/BirthdayChat.tsx
+Error: 
+
+Caused by:
+    0: Failed to read source code from C:\Users\Admin\Downloads\praisista\components\BirthdayChat.tsx
+    1: The system cannot find the file specified. (os error 2)
+
+Import trace for requested module:
+./components/BirthdayChat.tsx
+./components/PrivateRoom.tsx
+ ⨯ ./components/BirthdayChat.tsx
+Error: 
+
+Caused by:
+    0: Failed to read source code from C:\Users\Admin\Downloads\praisista\components\BirthdayChat.tsx
+    1: The system cannot find the file specified. (os error 2)
+
+Import trace for requested module:
+./components/BirthdayChat.tsx
+./components/PrivateRoom.tsx
+ ⨯ ./components/BirthdayChat.tsx
+Error: 
+
+Caused by:
+    0: Failed to read source code from C:\Users\Admin\Downloads\praisista\components\BirthdayChat.tsx
+    1: The system cannot find the file specified. (os error 2)
+
+Import trace for requested module:
+./components/BirthdayChat.tsx
+./components/PrivateRoom.tsx
+ ○ Compiling /api/chat ...
+ ✓ Compiled /api/chat in 28.9s (2258 modules)
+ GET /room 200 in 15146ms
+ GET / 200 in 6806ms
+ GET /room 200 in 3683ms
+ ○ Compiling /api/auth/[...all] ...
+ ✓ Compiled /api/auth/[...all] in 743ms (1571 modules)
+ GET /api/auth/get-session 200 in 4631ms
+ GET /api/chat 200 in 23626ms
+ GET /api/chat 200 in 29280ms
+ GET /api/chat 200 in 19932ms
+ GET /api/chat 200 in 32495ms
+ GET /api/chat 200 in 27174ms
+ GET /api/chat 200 in 22289ms
+ GET /api/chat 200 in 1606ms
+ GET /room 200 in 919ms
+ GET /api/chat 200 in 1398ms
+ GET /api/chat 200 in 2710ms
+ GET /api/chat 200 in 787ms
+ GET /api/chat 200 in 798ms
+ GET /api/chat 200 in 784ms
+ GET /api/chat 200 in 2359ms
+ GET /api/chat 200 in 3003ms
+ GET /api/chat 200 in 3629ms
+ GET /api/chat 200 in 3643ms
+ GET /api/chat 200 in 2234ms
+ GET /api/chat 200 in 811ms
+ GET /api/chat 200 in 798ms
+ GET /api/chat 200 in 932ms
+ GET /api/chat 200 in 1831ms
+ GET /api/chat 200 in 755ms
+ GET /api/chat 200 in 823ms
+ GET /api/chat 200 in 760ms
+ GET /api/chat 200 in 744ms
+ GET /api/chat 200 in 831ms
+ GET /api/chat 200 in 772ms
+ GET /api/chat 200 in 755ms
+ GET /api/chat 200 in 830ms
+ GET /api/chat 200 in 862ms
+ GET /api/chat 200 in 919ms
+   Reload env: .env
+ GET /api/chat 200 in 1135ms
+ ✓ Compiled in 980ms (2260 modules)
+ GET /api/chat 200 in 1760ms
+ GET /room 200 in 771ms
+ GET /room 200 in 1186ms
+ GET /api/chat 200 in 5047ms
+ GET /api/chat 200 in 2802ms
+ GET /api/chat 200 in 3257ms
+ GET /api/chat 200 in 5042ms
+ GET /api/chat 200 in 1286ms
+ POST /api/chat 200 in 1308ms
+ GET /api/chat 200 in 1552ms
+ GET /api/chat 200 in 1301ms
+ GET /api/chat 200 in 825ms
+ GET /api/chat 200 in 1299ms
+ GET /api/chat 200 in 787ms
+ GET /api/chat 200 in 808ms
+ GET /api/chat 200 in 830ms
+ GET /api/chat 200 in 798ms
+ GET /api/auth/get-session 200 in 596ms
+ GET /api/chat 200 in 767ms
+ GET /api/chat 200 in 2356ms
+ GET /api/chat 200 in 812ms
+ GET /api/chat 200 in 797ms
+ GET /api/chat 200 in 807ms
+ GET /api/chat 200 in 836ms
+ GET /api/chat 200 in 1153ms
+ POST /api/chat 200 in 1610ms
+ GET /api/chat 200 in 1361ms
+ GET /api/chat 200 in 786ms
+ GET /api/chat 200 in 815ms
+ GET /api/chat 200 in 845ms
+ GET /api/chat 200 in 798ms
+ GET /api/chat 200 in 989ms
+ GET /api/chat 200 in 853ms
+ GET /api/chat 200 in 861ms
+ GET /api/chat 200 in 823ms
+ GET /api/chat 200 in 840ms
+ GET /api/chat 200 in 851ms
+   Reload env: .env
+ GET /room 200 in 3030ms
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ ✓ Compiled in 15.8s (2181 modules)
+ GET /room 200 in 1427ms
+ GET /api/auth/get-session 200 in 36288ms
+ GET / 200 in 3728ms
+ GET /room 200 in 9159ms
+2026-09-26T03:56:48.307Z ERROR [Better Auth]: INTERNAL_SERVER_ERROR [Error: read ECONNRESET] {
+  errno: -4077,
+  code: 'ECONNRESET',
+  syscall: 'read'
+}
+2026-09-26T03:57:28.298Z ERROR [Better Auth]: Could not validate the database schema. Check your database connection.
+[Error: read ECONNRESET] {
+  errno: -4077,
+  code: 'ECONNRESET',
+  syscall: 'read'
+}
+ GET /api/auth/get-session 500 in 47499ms
+   Reload env: .env
+ ✓ Compiled in 3.1s (1522 modules)
+ GET /room 200 in 1733ms
+   Reload env: .env
+ GET / 200 in 5388ms
+ GET / 200 in 2707ms
+ ✓ Compiled in 12.8s (1536 modules)
+ GET /room 200 in 290ms
+ GET /room 200 in 940ms
+ ○ Compiling /api/auth/[...all] ...
+ ✓ Compiled /api/auth/[...all] in 3s (1478 modules)
+ GET /api/auth/get-session 200 in 5300ms
+ GET / 200 in 694ms
+2026-09-26T03:59:18.142Z ERROR [Better Auth]: Could not validate the database schema. Check your database connection.
+[Error: read ECONNRESET] {
+  errno: -4077,
+  code: 'ECONNRESET',
+  syscall: 'read'
+}

@@ -1,66 +1,37 @@
 import { NextRequest, NextResponse } from "next/server";
+import { auth } from "@/lib/auth";
 import { getBirthdayAIResponse } from "@/lib/ai";
-import { saveChatMessage } from "@/lib/db";
+import { listGroupMessages, saveGroupMessage } from "@/lib/db";
 
 export const runtime = "nodejs";
 
-type ChatMessage = { role: "user" | "assistant"; content: string };
+async function getViewer(req: NextRequest) {
+  return auth.api.getSession({ headers: req.headers });
+}
 
-function isChatMessage(value: unknown): value is ChatMessage {
-  if (typeof value !== "object" || value === null) return false;
-  const v = value as Record<string, unknown>;
-  return (v.role === "user" || v.role === "assistant") && typeof v.content === "string";
+export async function GET(req: NextRequest) {
+  const session = await getViewer(req);
+  if (!session) return NextResponse.json({ error: "Sign in to view this chat." }, { status: 401 });
+  return NextResponse.json({ messages: await listGroupMessages() });
 }
 
 export async function POST(req: NextRequest) {
-  let body: unknown;
-  try {
-    body = await req.json();
-  } catch {
-    return NextResponse.json({ error: "Invalid JSON body." }, { status: 400 });
-  }
+  const session = await getViewer(req);
+  if (!session) return NextResponse.json({ error: "Sign in to send a message." }, { status: 401 });
+  const body = await req.json().catch(() => null) as { content?: unknown; aiEnabled?: unknown } | null;
+  const content = typeof body?.content === "string" ? body.content.trim().slice(0, 1000) : "";
+  if (!content) return NextResponse.json({ error: "Message cannot be empty." }, { status: 400 });
 
-  const { aiName, messages, sessionId } = (body ?? {}) as {
-    aiName?: unknown;
-    messages?: unknown;
-    sessionId?: unknown;
-  };
-
-  if (typeof aiName !== "string" || !aiName.trim()) {
-    return NextResponse.json({ error: "aiName is required." }, { status: 400 });
+  const message = await saveGroupMessage({ authorId: session.user.id, authorName: session.user.name || "Guest", role: "user", content });
+  let aiMessage = null;
+  if (body?.aiEnabled === true && process.env.GROQ_API_KEY) {
+    const history = (await listGroupMessages()).slice(-20).map((item) => ({ role: item.role, content: `${item.authorName}: ${item.content}` }));
+    const birthdayGirl = process.env.BIRTHDAY_GIRL_EMAIL?.toLowerCase() === session.user.email.toLowerCase();
+    const reply = await getBirthdayAIResponse({
+      aiName: "A little birthday magic",
+      messages: [{ role: "assistant", content: birthdayGirl ? "The birthday girl just spoke. Give her a warm, natural birthday wish before responding." : "" }, ...history],
+    });
+    aiMessage = await saveGroupMessage({ authorId: "birthday-magic", authorName: "A little magic", role: "assistant", content: reply });
   }
-  if (!Array.isArray(messages) || !messages.every(isChatMessage)) {
-    return NextResponse.json({ error: "messages must be an array of { role, content }." }, { status: 400 });
-  }
-  if (typeof sessionId !== "string" || !/^[0-9a-f-]{36}$/i.test(sessionId)) {
-    return NextResponse.json({ error: "A valid chat session is required." }, { status: 400 });
-  }
-  // Cap history sent to the model — keeps latency/cost bounded and avoids unbounded payloads.
-  const trimmed = (messages as ChatMessage[]).slice(-20);
-
-  if (!process.env.GROQ_API_KEY) {
-    return NextResponse.json(
-      { error: "GROQ_API_KEY is not configured on the server." },
-      { status: 500 }
-    );
-  }
-  if (!process.env.DATABASE_URL) {
-    return NextResponse.json({ error: "DATABASE_URL is not configured on the server." }, { status: 500 });
-  }
-
-  try {
-    const reply = await getBirthdayAIResponse({ aiName, messages: trimmed });
-    const latestMessage = trimmed.at(-1);
-    if (latestMessage?.role === "user") {
-      await saveChatMessage({ sessionId, role: "user", content: latestMessage.content });
-    }
-    await saveChatMessage({ sessionId, role: "assistant", content: reply });
-    return NextResponse.json({ reply });
-  } catch (err) {
-    console.error("chat route error:", err);
-    return NextResponse.json(
-      { error: "Sugar is unavailable right now. Check GROQ_API_KEY and DATABASE_URL, then try again." },
-      { status: 502 },
-    );
-  }
+  return NextResponse.json({ message, aiMessage });
 }
