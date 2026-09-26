@@ -1517,3 +1517,5 @@ Require stack:
  GET /icon?7c0e0aa7205e44b7 200 in 5682ms
  ✓ Compiled in 7.9s (2468 modules)
  ✓ Compiled in 2.3s (2468 modules)
+   Reload env: .env
+ ✓ Compiled in 6.8s (2468 modules)
