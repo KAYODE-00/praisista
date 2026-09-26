@@ -588,3 +588,26 @@ Import trace for requested module:
  GET /api/chat 200 in 820ms
  GET /api/chat 200 in 798ms
  GET /api/chat 200 in 817ms
+ GET /api/chat 200 in 3372ms
+ ○ Compiling /api/auth/[...all] ...
+ ✓ Compiled /api/auth/[...all] in 20s (2566 modules)
+ GET /room 200 in 22152ms
+ GET /room 200 in 22097ms
+ GET /room 200 in 2502ms
+ GET /room 200 in 135ms
+ GET /room 200 in 173ms
+ GET /room 200 in 134ms
+ ○ Compiling /icon ...
+ GET /api/auth/get-session 200 in 15519ms
+ ✓ Compiled /icon in 4.3s (2555 modules)
+ GET /icon?7c0e0aa7205e44b7 200 in 7822ms
+ GET /icon?7c0e0aa7205e44b7 200 in 5460ms
+ GET /icon?7c0e0aa7205e44b7 200 in 58ms
+ GET /icon?7c0e0aa7205e44b7 200 in 55ms
+ GET /api/chat 200 in 2211ms
+ GET /api/chat 200 in 11032ms
+ GET /api/chat 200 in 4643ms
+ GET /api/auth/get-session 200 in 5110ms
+ GET /api/chat 200 in 6901ms
+ GET /api/auth/get-session 200 in 555ms
+ GET /api/auth/get-session 200 in 66ms
