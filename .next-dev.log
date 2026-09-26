@@ -611,3 +611,11 @@ Import trace for requested module:
  GET /api/chat 200 in 6901ms
  GET /api/auth/get-session 200 in 555ms
  GET /api/auth/get-session 200 in 66ms
+ POST /api/auth/sign-in/email 200 in 923ms
+ GET /api/auth/get-session 200 in 546ms
+ POST /api/auth/sign-in/email 200 in 4511ms
+ GET /api/auth/get-session 200 in 593ms
+ ✓ Compiled in 6.3s (2468 modules)
+ GET /room 200 in 681ms
+ GET /room 200 in 119ms
+ GET /room 200 in 116ms
