@@ -351,16 +351,18 @@ export default function BirthdayExperience() {
                 transition={{ delay: 1.25 }}
                 className="mt-9 flex flex-col items-center gap-3"
               >
-                <button
-                  onClick={() => setShowMessage(true)}
-                  className="group inline-flex items-center gap-3 rounded-full border border-[var(--frosting)]/30 bg-[var(--frosting)]/10 px-6 py-3 text-sm text-[var(--cream)] backdrop-blur transition hover:bg-[var(--frosting)]/20"
-                >
-                  There's something I want you to see
-                  <ArrowRight
-                    size={16}
-                    className="transition-transform group-hover:translate-x-1"
-                  />
-                </button>
+                {!showMessage && (
+                  <button
+                    onClick={() => setShowMessage(true)}
+                    className="group inline-flex items-center gap-3 rounded-full border border-[var(--frosting)]/30 bg-[var(--frosting)]/10 px-6 py-3 text-sm text-[var(--cream)] backdrop-blur transition hover:bg-[var(--frosting)]/20"
+                  >
+                    There's something I want you to see
+                    <ArrowRight
+                      size={16}
+                      className="transition-transform group-hover:translate-x-1"
+                    />
+                  </button>
+                )}
                 <button
                   onClick={() => setShowChat((value) => !value)}
                   className="group inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[.04] px-6 py-3 text-sm text-white/70 backdrop-blur transition hover:bg-white/[.08]"

@@ -639,3 +639,874 @@ Import trace for requested module:
  GET /room 200 in 446ms
  GET /room 200 in 143ms
  GET /room 200 in 209ms
+ ✓ Compiled in 3.7s (2468 modules)
+ GET /room 200 in 660ms
+ GET /room 200 in 146ms
+ GET /room 200 in 145ms
+ ○ Compiling /api/auth/[...all] ...
+ ✓ Compiled /api/auth/[...all] in 2.1s (1618 modules)
+ GET /room 200 in 1583ms
+ GET /room 200 in 1587ms
+ GET /room 200 in 166ms
+ ○ Compiling /icon ...
+ ✓ Compiled /icon in 1522ms (1633 modules)
+ GET /icon?7c0e0aa7205e44b7 200 in 2984ms
+ ○ Compiling /api/gallery ...
+ ✓ Compiled /api/gallery in 1247ms (1637 modules)
+Error [NeonDbError]: Error connecting to database: TypeError: fetch failed
+    at async listGalleryItems (lib\gallery.ts:6:44)
+    at async GET (app\api\gallery\route.ts:3:65)
+  4 | let ready: Promise<void> | undefined;
+  5 | async function schema() { if (!ready) { const sql = neon(getDatabaseUrl()); ready = sql`CREATE TABLE IF NOT EXISTS birthday_gallery_items (id BIGSERIAL PRIMARY KEY, url TEXT NOT NULL, public_id TEXT NOT NULL DEFAULT '', resource_type TEXT NOT NULL, caption TEXT, created_at TIMESTAMPTZ NOT NULL DEFAULT NOW())`.then(async () => { await sql`ALTER TABLE birthday_gallery_items ADD COLUMN IF NOT EXISTS public_id TEXT NOT NULL DEFAULT ''`; }); } return ready; }
+> 6 | export async function listGalleryItems() { await schema(); const rows = await neon(getDatabaseUrl())`SELECT id,url,public_id,resource_type,caption FROM birthday_gallery_items ORDER BY id DESC`; return rows.map((r) => ({ id: Number(r.id), url: String(r.url), publicId: String(r.public_id), resourceType: r.resource_type === "video" ? "video" : "image", caption: r.caption ? String(r.caption) : null })) as GalleryItem[]; }
+    |                                            ^
+  7 | export async function addGalleryItem(item: Omit<GalleryItem, "id">) { await schema(); await neon(getDatabaseUrl())`INSERT INTO birthday_gallery_items (url,public_id,resource_type,caption) VALUES (${item.url},${item.publicId},${item.resourceType},${item.caption})`; }
+  8 | export async function deleteGalleryItem(id: number) { await schema(); const rows = await neon(getDatabaseUrl())`DELETE FROM birthday_gallery_items WHERE id=${id} RETURNING public_id,resource_type`; return rows[0] ? { publicId: String(rows[0].public_id), resourceType: rows[0].resource_type === "video" ? "video" : "image" } : null; }
+  9 | {
+  severity: undefined,
+  code: undefined,
+  detail: undefined,
+  hint: undefined,
+  position: undefined,
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: undefined,
+  line: undefined,
+  routine: undefined,
+  sourceError: [TypeError: fetch failed] {
+    [cause]: [Error [ConnectTimeoutError]: Connect Timeout Error (attempted addresses: 3.18.239.121:443, timeout: 10000ms)] {
+      code: 'UND_ERR_CONNECT_TIMEOUT'
+    }
+  }
+}
+ GET /api/gallery 500 in 13890ms
+Error [NeonDbError]: Error connecting to database: TypeError: fetch failed
+    at async listGalleryItems (lib\gallery.ts:6:44)
+    at async GET (app\api\gallery\route.ts:3:65)
+  4 | let ready: Promise<void> | undefined;
+  5 | async function schema() { if (!ready) { const sql = neon(getDatabaseUrl()); ready = sql`CREATE TABLE IF NOT EXISTS birthday_gallery_items (id BIGSERIAL PRIMARY KEY, url TEXT NOT NULL, public_id TEXT NOT NULL DEFAULT '', resource_type TEXT NOT NULL, caption TEXT, created_at TIMESTAMPTZ NOT NULL DEFAULT NOW())`.then(async () => { await sql`ALTER TABLE birthday_gallery_items ADD COLUMN IF NOT EXISTS public_id TEXT NOT NULL DEFAULT ''`; }); } return ready; }
+> 6 | export async function listGalleryItems() { await schema(); const rows = await neon(getDatabaseUrl())`SELECT id,url,public_id,resource_type,caption FROM birthday_gallery_items ORDER BY id DESC`; return rows.map((r) => ({ id: Number(r.id), url: String(r.url), publicId: String(r.public_id), resourceType: r.resource_type === "video" ? "video" : "image", caption: r.caption ? String(r.caption) : null })) as GalleryItem[]; }
+    |                                            ^
+  7 | export async function addGalleryItem(item: Omit<GalleryItem, "id">) { await schema(); await neon(getDatabaseUrl())`INSERT INTO birthday_gallery_items (url,public_id,resource_type,caption) VALUES (${item.url},${item.publicId},${item.resourceType},${item.caption})`; }
+  8 | export async function deleteGalleryItem(id: number) { await schema(); const rows = await neon(getDatabaseUrl())`DELETE FROM birthday_gallery_items WHERE id=${id} RETURNING public_id,resource_type`; return rows[0] ? { publicId: String(rows[0].public_id), resourceType: rows[0].resource_type === "video" ? "video" : "image" } : null; }
+  9 | {
+  severity: undefined,
+  code: undefined,
+  detail: undefined,
+  hint: undefined,
+  position: undefined,
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: undefined,
+  line: undefined,
+  routine: undefined,
+  sourceError: [TypeError: fetch failed] {
+    [cause]: [Error [ConnectTimeoutError]: Connect Timeout Error (attempted addresses: 3.18.239.121:443, timeout: 10000ms)] {
+      code: 'UND_ERR_CONNECT_TIMEOUT'
+    }
+  }
+}
+ GET /api/gallery 500 in 350ms
+ GET /api/auth/get-session 200 in 34450ms
+2026-09-26T05:10:34.743Z ERROR [Better Auth]: Could not validate the database schema. Check your database connection.
+[Error: read ECONNRESET] {
+  errno: -4077,
+  code: 'ECONNRESET',
+  syscall: 'read'
+}
+2026-09-26T05:10:55.270Z ERROR [Better Auth]: Could not validate the database schema. Check your database connection.
+[Error: read ECONNRESET] {
+  errno: -4077,
+  code: 'ECONNRESET',
+  syscall: 'read'
+}
+[Error: read ECONNRESET] {
+  errno: -4077,
+  code: 'ECONNRESET',
+  syscall: 'read'
+}
+ GET /api/auth/get-session 500 in 49720ms
+ GET /api/auth/get-session 500 in 35947ms
+ GET /api/auth/get-session 200 in 8024ms
+[Error: read ECONNRESET] {
+  errno: -4077,
+  code: 'ECONNRESET',
+  syscall: 'read'
+}
+[Error: read ECONNRESET] {
+  errno: -4077,
+  code: 'ECONNRESET',
+  syscall: 'read'
+}
+[Error: read ECONNRESET] {
+  errno: -4077,
+  code: 'ECONNRESET',
+  syscall: 'read'
+}
+ GET /api/auth/get-session 500 in 36311ms
+ GET /api/auth/get-session 500 in 16306ms
+ ○ Compiling /api/chat ...
+ ✓ Compiled /api/chat in 22.1s (1709 modules)
+ GET /room 200 in 199ms
+2026-09-26T05:16:13.120Z ERROR [Better Auth]: Could not validate the database schema. Check your database connection.
+[Error: read ECONNRESET] {
+  errno: -4077,
+  code: 'ECONNRESET',
+  syscall: 'read'
+}
+[Error: read ECONNRESET] {
+  errno: -4077,
+  code: 'ECONNRESET',
+  syscall: 'read'
+}
+[Error: read ECONNRESET] {
+  errno: -4077,
+  code: 'ECONNRESET',
+  syscall: 'read'
+}
+[Error: read ECONNRESET] {
+  errno: -4077,
+  code: 'ECONNRESET',
+  syscall: 'read'
+}
+[Error: read ECONNRESET] {
+  errno: -4077,
+  code: 'ECONNRESET',
+  syscall: 'read'
+}
+[Error: read ECONNRESET] {
+  errno: -4077,
+  code: 'ECONNRESET',
+  syscall: 'read'
+}
+ GET /api/chat 500 in 69613ms
+ GET /api/chat 500 in 63153ms
+ GET /api/chat 500 in 63119ms
+ GET /api/chat 500 in 56667ms
+ GET /api/chat 500 in 56665ms
+ GET /api/chat 500 in 69621ms
+ GET /room 200 in 109ms
+ GET /room 200 in 108ms
+ ○ Compiling /api/auth/[...all] ...
+ ✓ Compiled /api/auth/[...all] in 4.6s (1618 modules)
+ ○ Compiling /api/chat ...
+ ✓ Compiled /api/chat in 3.8s (1711 modules)
+ GET /api/auth/get-session 200 in 12779ms
+ GET /api/chat 200 in 17813ms
+ ○ Compiling /api/gallery ...
+ GET /api/chat 200 in 6294ms
+ GET /api/chat 200 in 6306ms
+ GET /api/chat 200 in 14925ms
+ GET /api/chat 200 in 6365ms
+ GET /api/chat 200 in 20490ms
+ ✓ Compiled /api/gallery in 24.6s (2569 modules)
+ GET /room 200 in 474ms
+ GET /room 200 in 136ms
+ GET /room 200 in 125ms
+ GET /api/gallery 200 in 8144ms
+ GET /api/gallery 200 in 29542ms
+ GET /api/auth/get-session 200 in 4755ms
+ GET /api/auth/get-session 200 in 622ms
+ GET /api/auth/get-session 200 in 655ms
+ GET /api/auth/get-session 200 in 4078ms
+ GET /api/auth/get-session 200 in 4171ms
+ GET /api/auth/get-session 200 in 601ms
+ GET /api/auth/get-session 200 in 576ms
+ GET /api/auth/get-session 200 in 2210ms
+ GET /api/auth/get-session 200 in 2078ms
+ GET /api/auth/get-session 200 in 621ms
+ GET /api/auth/get-session 200 in 598ms
+ ✓ Compiled in 12.2s (2468 modules)
+ GET /room 200 in 664ms
+ GET /room 200 in 145ms
+ GET /room 200 in 125ms
+ ○ Compiling /api/auth/[...all] ...
+ ✓ Compiled /api/auth/[...all] in 5.3s (1618 modules)
+ GET /api/auth/get-session 200 in 10061ms
+ GET /api/auth/get-session 200 in 600ms
+   Reload env: .env
+ ✓ Compiled in 19.4s (2454 modules)
+ GET /room 200 in 970ms
+ GET /room 200 in 970ms
+ GET /room 200 in 211ms
+ ○ Compiling /api/auth/[...all] ...
+ ✓ Compiled /api/auth/[...all] in 4.2s (1618 modules)
+ ⨯ [Error: ENOENT: no such file or directory, open 'C:\Users\Admin\Downloads\praisista\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\Admin\\Downloads\\praisista\\.next\\routes-manifest.json',
+  page: '/api/auth/get-session'
+}
+ ○ Compiling /_error ...
+ ⨯ Error: Cannot find module './873.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\app\api\auth\[...all]\route.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\app\room\page.js:10:9061)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\app\room\page.js:10:9115) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array],
+  page: '/room'
+}
+ ⨯ Error: Cannot find module './873.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\app\api\auth\[...all]\route.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\app\room\page.js:10:9061)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\app\room\page.js:10:9115) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array],
+  page: '/room'
+}
+ GET /api/auth/get-session 500 in 16404ms
+ ⨯ Failed to generate static paths for /api/auth/[...all]:
+[Error: Cannot find module './vendor-chunks/@better-auth.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\app\api\auth\[...all]\route.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\dev\static-paths-worker.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\compiled\jest-worker\processChild.js] {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ ✓ Compiled /_error in 13.3s (2555 modules)
+ ⨯ Error: Cannot find module './611.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:325)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:371) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ ⨯ Error: Cannot find module './611.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:325)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:371) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ ⨯ Error: Cannot find module './611.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:325)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:371) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+[Error: ENOENT: no such file or directory, open 'C:\Users\Admin\Downloads\praisista\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\Admin\\Downloads\\praisista\\.next\\routes-manifest.json',
+  page: '/api/auth/get-session'
+}
+Error: Cannot find module './873.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\app\api\auth\[...all]\route.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\app\room\page.js:10:9061)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\app\room\page.js:10:9115) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array],
+  page: '/room'
+}
+Error: Cannot find module './873.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\app\api\auth\[...all]\route.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\app\room\page.js:10:9061)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\app\room\page.js:10:9115) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array],
+  page: '/room'
+}
+ ⨯ Error: Cannot find module './611.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:325)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:371) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ ⨯ Error: Cannot find module './611.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:325)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:371) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ ⨯ Error: Cannot find module './611.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:325)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:371) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+[Error: ENOENT: no such file or directory, open 'C:\Users\Admin\Downloads\praisista\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\Admin\\Downloads\\praisista\\.next\\routes-manifest.json'
+}
+[Error: ENOENT: no such file or directory, open 'C:\Users\Admin\Downloads\praisista\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\Admin\\Downloads\\praisista\\.next\\routes-manifest.json'
+}
+[Error: ENOENT: no such file or directory, open 'C:\Users\Admin\Downloads\praisista\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\Admin\\Downloads\\praisista\\.next\\routes-manifest.json'
+}
+ GET /room 500 in 19741ms
+ GET /room 500 in 1260ms
+ GET /room 500 in 16096ms
+ GET /room 500 in 1261ms
+ ⨯ Error: Cannot find module './873.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\app\room\page.js:10:9061)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\app\room\page.js:10:9115) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array],
+  page: '/room'
+}
+ ⨯ Error: Cannot find module './873.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\app\room\page.js:10:9061)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\app\room\page.js:10:9115) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array],
+  page: '/room'
+}
+ ⨯ Error: Cannot find module './611.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:325)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:371) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ ⨯ Error: Cannot find module './611.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:325)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:371) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+Error: Cannot find module './873.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\app\room\page.js:10:9061)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\app\room\page.js:10:9115) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array],
+  page: '/room'
+}
+Error: Cannot find module './873.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\app\room\page.js:10:9061)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\app\room\page.js:10:9115) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array],
+  page: '/room'
+}
+ ⨯ Error: Cannot find module './873.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\app\room\page.js:10:9061)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\app\room\page.js:10:9115) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array],
+  page: '/room'
+}
+ ⨯ Error: Cannot find module './611.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:325)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:371) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ ⨯ Error: Cannot find module './611.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:325)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:371) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ ⨯ Error: Cannot find module './611.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:325)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:371) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+[Error: ENOENT: no such file or directory, open 'C:\Users\Admin\Downloads\praisista\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\Admin\\Downloads\\praisista\\.next\\routes-manifest.json'
+}
+[Error: ENOENT: no such file or directory, open 'C:\Users\Admin\Downloads\praisista\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\Admin\\Downloads\\praisista\\.next\\routes-manifest.json'
+}
+Error: Cannot find module './873.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\app\room\page.js:10:9061)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\app\room\page.js:10:9115) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array],
+  page: '/room'
+}
+ GET /room 500 in 1083ms
+ GET /room 500 in 518ms
+ GET /room 500 in 1082ms
+ GET /room 500 in 518ms
+ GET /api/auth/get-session 200 in 8029ms
+ ⨯ Error: Cannot find module './611.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:325)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:371) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+[Error: ENOENT: no such file or directory, open 'C:\Users\Admin\Downloads\praisista\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\Admin\\Downloads\\praisista\\.next\\routes-manifest.json'
+}
+ GET /room 500 in 1167ms
+ GET /room 500 in 169ms
+ ⨯ Error: Cannot find module './873.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\app\room\page.js:10:9061)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\app\room\page.js:10:9115) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array],
+  page: '/room'
+}
+ ⨯ Error: Cannot find module './611.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:325)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:371) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+Error: Cannot find module './873.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\app\room\page.js:10:9061)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\app\room\page.js:10:9115) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array],
+  page: '/room'
+}
+ ⨯ Error: Cannot find module './611.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:325)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:371) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ ⨯ [Error: Cannot find module './vendor-chunks/@better-auth.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\app\api\auth\[...all]\route.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\dev\static-paths-worker.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\compiled\jest-worker\processChild.js] {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array],
+  page: '/api/auth/get-session'
+}
+ ⨯ Error: Cannot find module './611.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:325)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:371) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+[Error: ENOENT: no such file or directory, open 'C:\Users\Admin\Downloads\praisista\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\Admin\\Downloads\\praisista\\.next\\routes-manifest.json'
+}
+ GET /room 500 in 484ms
+ GET /room 500 in 218ms
+[Error: Cannot find module './vendor-chunks/@better-auth.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\app\api\auth\[...all]\route.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\dev\static-paths-worker.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\compiled\jest-worker\processChild.js] {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array],
+  page: '/api/auth/get-session'
+}
+ ⨯ Error: Cannot find module './611.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:325)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:371) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+[Error: ENOENT: no such file or directory, open 'C:\Users\Admin\Downloads\praisista\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\Admin\\Downloads\\praisista\\.next\\routes-manifest.json'
+}
+ ✓ Compiled in 11.4s (2569 modules)
+ ✓ Compiled in 16.4s (2468 modules)
+ ✓ Compiled in 2.1s (2468 modules)

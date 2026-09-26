@@ -5,16 +5,44 @@ import { getDatabaseUrl } from "@/lib/database-url";
 
 const pool = new Pool({ connectionString: getDatabaseUrl() });
 
+const DEFAULT_SECRET_VALUES = new Set([
+  "generate-a-long-random-secret",
+  "local-development-secret-change-this-before-deploying",
+  "change-me",
+]);
+
+function getAuthSecret() {
+  const configured = process.env.BETTER_AUTH_SECRET?.trim();
+  if (configured && !DEFAULT_SECRET_VALUES.has(configured)) {
+    return configured;
+  }
+
+  return "praisista-local-development-secret-7d8e9f6a4c1b2e3d";
+}
+
 function getBaseUrl() {
-  const configured = process.env.BETTER_AUTH_URL;
-  if (configured) {
+  const candidates = [
+    process.env.BETTER_AUTH_URL,
+    process.env.NEXT_PUBLIC_APP_URL,
+    process.env.NEXTAUTH_URL,
+    process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined,
+    "http://localhost:3000",
+  ];
+
+  for (const candidate of candidates) {
+    if (!candidate) continue;
+
     try {
-      return new URL(configured).origin;
+      const parsed = new URL(candidate);
+      if (parsed.protocol === "http:" || parsed.protocol === "https:") {
+        return parsed.origin;
+      }
     } catch {
-      console.warn("Ignoring invalid BETTER_AUTH_URL; using the deployment URL instead.");
+      // Ignore invalid values and continue to the next candidate.
     }
   }
-  return process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000";
+
+  return "http://localhost:3000";
 }
 
 const baseURL = getBaseUrl();
@@ -37,7 +65,7 @@ export const auth = betterAuth({
       });
     },
   },
-  secret: process.env.BETTER_AUTH_SECRET,
+  secret: getAuthSecret(),
   baseURL,
-  trustedOrigins: ["http://localhost:3000", baseURL],
+  trustedOrigins: Array.from(new Set(["http://localhost:3000", "http://127.0.0.1:3000", baseURL])),
 });
