@@ -344,3 +344,133 @@ Import trace for requested module:
  GET /room 200 in 183ms
  ✓ Compiled in 12.3s (2184 modules)
  GET / 200 in 8775ms
+ ✓ Compiled in 17.6s (2184 modules)
+ GET /room 200 in 20715ms
+ GET / 200 in 1170ms
+ GET /room 200 in 1040ms
+ ✓ Compiled in 3.7s (2182 modules)
+ GET / 200 in 1127ms
+ GET /room 200 in 253ms
+ GET /room 200 in 695ms
+ ○ Compiling /api/auth/[...all] ...
+ ✓ Compiled /api/auth/[...all] in 4.1s (1489 modules)
+ GET /room 200 in 4748ms
+ GET /api/auth/get-session 200 in 8972ms
+ ✓ Compiled in 2.1s (2187 modules)
+ GET /room 200 in 1215ms
+ GET /room 200 in 100ms
+ GET /room 200 in 1191ms
+ GET /api/auth/get-session 200 in 3414ms
+ GET / 307 in 119ms
+ GET /room 200 in 92ms
+ GET /api/auth/get-session 200 in 2109ms
+ GET /room 200 in 63ms
+ GET /room 200 in 63ms
+ GET /room 200 in 57ms
+ GET /room 200 in 54ms
+ GET /room 200 in 59ms
+ GET /room 200 in 61ms
+ GET /room 200 in 51ms
+ GET /room 200 in 209ms
+ GET /api/auth/get-session 200 in 2172ms
+ GET /room 200 in 434ms
+ GET /room 200 in 131ms
+ GET /room 200 in 211ms
+ GET /api/auth/get-session 200 in 176ms
+ GET /api/auth/get-session 200 in 2415ms
+ GET /admin 200 in 2828ms
+ ○ Compiling /api/gallery ...
+ ✓ Compiled /api/admin/gallery in 15.8s (2454 modules)
+ GET /api/gallery 200 in 24795ms
+Error [NeonDbError]: null value in column "public_id" of relation "birthday_gallery_items" violates not-null constraint
+    at async addGalleryItem (lib\gallery.ts:7:87)
+    at async POST (app\api\admin\gallery\route.ts:7:1255)
+  5 | async function schema() { if (!ready) { const sql = neon(getDatabaseUrl()); ready = sql`CREATE TABLE IF NOT EXISTS birthday_gallery_items (id BIGSERIAL PRIMARY KEY, url TEXT NOT NULL, public_id TEXT NOT NULL DEFAULT '', resource_type TEXT NOT NULL, caption TEXT, created_at TIMESTAMPTZ NOT NULL DEFAULT NOW())`.then(async () => { await sql`ALTER TABLE birthday_gallery_items ADD COLUMN IF NOT EXISTS public_id TEXT NOT NULL DEFAULT ''`; }); } return ready; }
+  6 | export async function listGalleryItems() { await schema(); const rows = await neon(getDatabaseUrl())`SELECT id,url,public_id,resource_type,caption FROM birthday_gallery_items ORDER BY id DESC`; return rows.map((r) => ({ id: Number(r.id), url: String(r.url), publicId: String(r.public_id), resourceType: r.resource_type === "video" ? "video" : "image", caption: r.caption ? String(r.caption) : null })) as GalleryItem[]; }
+> 7 | export async function addGalleryItem(item: Omit<GalleryItem, "id">) { await schema(); await neon(getDatabaseUrl())`INSERT INTO birthday_gallery_items (url,public_id,resource_type,caption) VALUES (${item.url},${item.publicId},${item.resourceType},${item.caption})`; }
+    |                                                                                       ^
+  8 | export async function deleteGalleryItem(id: number) { await schema(); const rows = await neon(getDatabaseUrl())`DELETE FROM birthday_gallery_items WHERE id=${id} RETURNING public_id,resource_type`; return rows[0] ? { publicId: String(rows[0].public_id), resourceType: rows[0].resource_type === "video" ? "video" : "image" } : null; }
+  9 | {
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (2, https://res.cloudinary.com/odwaeawq/image/upload/v1790397693/bir..., image, null, 2026-09-26 04:41:34.149119+00, null).',
+  hint: undefined,
+  position: undefined,
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: 'public',
+  table: 'birthday_gallery_items',
+  column: 'public_id',
+  dataType: undefined,
+  constraint: undefined,
+  file: 'execMain.c',
+  line: '2223',
+  routine: 'ReportNotNullViolationError',
+  sourceError: undefined
+}
+ POST /api/admin/gallery 500 in 20213ms
+ GET /admin 200 in 13796ms
+ GET /admin 200 in 9375ms
+ ✓ Compiled in 10.9s (2189 modules)
+ GET /room 200 in 7905ms
+ GET /room 200 in 179ms
+ GET /room 200 in 77ms
+ GET /room 200 in 75ms
+ GET /admin 200 in 6845ms
+ GET /admin 200 in 4267ms
+ ○ Compiling /api/admin/gallery ...
+ ✓ Compiled /api/admin/gallery in 1923ms (2438 modules)
+ GET /room 200 in 609ms
+ GET /admin 200 in 6787ms
+ POST /api/admin/gallery 200 in 11318ms
+ GET /api/gallery 200 in 302ms
+ POST /api/admin/gallery 200 in 12010ms
+ GET /api/gallery 200 in 270ms
+ DELETE /api/admin/gallery?id=3 200 in 3016ms
+ GET /api/gallery 200 in 292ms
+ ✓ Compiled in 7.1s (2452 modules)
+ GET /room 200 in 4119ms
+ GET /room 200 in 1567ms
+ ○ Compiling /api/auth/[...all] ...
+ GET /admin 200 in 7491ms
+ ✓ Compiled /api/auth/[...all] in 5.7s (1756 modules)
+ GET /api/auth/get-session 200 in 9173ms
+ ⨯ ./components/BirthdayExperience.tsx:5:1
+Module not found: Can't resolve '@/components/Gallery'
+  3 | import { useEffect, useMemo, useRef, useState } from "react";
+  4 | import Link from "next/link";
+> 5 | import Gallery from "@/components/Gallery";
+    | ^
+  6 | import { AnimatePresence, motion } from "framer-motion";
+  7 | import {
+  8 |   Cake,
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./components/PrivateRoom.tsx
+   Reload env: .env
+   Reload env: .env
+   Reload env: .env
+ ⨯ ./components/BirthdayExperience.tsx:5:1
+Module not found: Can't resolve '@/components/Gallery'
+  3 | import { useEffect, useMemo, useRef, useState } from "react";
+  4 | import Link from "next/link";
+> 5 | import Gallery from "@/components/Gallery";
+    | ^
+  6 | import { AnimatePresence, motion } from "framer-motion";
+  7 | import {
+  8 |   Cake,
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./components/PrivateRoom.tsx
+   Reload env: .env
+   Reload env: .env
+   Reload env: .env
+ GET /api/auth/get-session 500 in 89100ms
+ GET /room 500 in 92213ms
+ GET /room 500 in 110036ms
+ ○ Compiling /_error ...

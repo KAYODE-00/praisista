@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import Gallery from "@/components/Gallery";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   Cake,
@@ -181,7 +182,7 @@ export default function BirthdayExperience() {
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[var(--bg)]">
-      {birthdayAudioEnabled && <audio ref={audioRef} loop src="/audio/happy-birthday.mp3" preload="auto" />}
+      {birthdayAudioEnabled && <audio ref={audioRef} autoPlay loop src="/audio/happy-birthday.mp3" preload="auto" />}
 
       <FloatingTreats />
       <div className="noise pointer-events-none fixed inset-0 opacity-30" />
@@ -391,6 +392,7 @@ export default function BirthdayExperience() {
                       deserve a beautiful day, beautiful memories, and people
                       who genuinely appreciate having you around. ❤️
                     </p>
+                    <Gallery />
                     <button
                       onClick={() => setShowMessage(false)}
                       className="mt-5 text-xs text-white/35 hover:text-white/70"

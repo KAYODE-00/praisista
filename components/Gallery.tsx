@@ -1,0 +1,4 @@
+"use client";
+import { useEffect, useState } from "react";
+import type { GalleryItem } from "@/lib/gallery";
+export default function Gallery() { const [items, setItems] = useState<GalleryItem[]>([]); useEffect(() => { fetch("/api/gallery").then((r) => r.json()).then((data) => setItems(data.items ?? [])); }, []); return <div className="mt-6 grid grid-cols-2 gap-2">{items.map((item, index) => <figure key={item.id} className={`overflow-hidden rounded-2xl bg-white/5 ${index % 5 === 0 ? "col-span-2" : ""}`}>{item.resourceType === "video" ? <video controls src={item.url} className="h-44 w-full object-cover" /> : <img src={item.url} alt={item.caption ?? "Birthday memory"} className="h-44 w-full object-cover" />}{item.caption && <figcaption className="p-2 text-xs text-white/65">{item.caption}</figcaption>}</figure>)}</div>; }

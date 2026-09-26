@@ -1,5 +1,5 @@
-import BirthdayExperience from "@/components/BirthdayExperience";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return <BirthdayExperience />;
+  redirect("/room");
 }
