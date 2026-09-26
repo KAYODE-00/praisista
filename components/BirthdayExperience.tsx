@@ -174,7 +174,10 @@ export default function BirthdayExperience() {
     return () => window.clearTimeout(fadeTimer);
   }, [entered, isBirthday, soundOn]);
 
-  const enter = () => window.location.assign("/room");
+  const enter = () => {
+    setEntered(true);
+    if (soundOn) window.setTimeout(() => audioRef.current?.play().catch(() => {}), 50);
+  };
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[var(--bg)]">
@@ -281,13 +284,12 @@ export default function BirthdayExperience() {
                 </motion.button>
               )}
 
-              <button
-                onClick={() => setSoundOn((v) => !v)}
-                className="mx-auto mt-5 flex items-center gap-2 text-xs text-white/35 transition hover:text-white/70"
-              >
-                {soundOn ? <Volume2 size={14} /> : <VolumeX size={14} />}
-                Birthday song {soundOn ? "on" : "off"}
-              </button>
+              {birthdayAudioEnabled && (
+                <button onClick={() => setSoundOn((value) => !value)} className="fixed bottom-5 right-5 z-30 rounded-full border border-white/15 bg-[var(--bg)]/80 px-4 py-2 text-xs text-white/70 backdrop-blur">
+                  {soundOn ? "Music on" : "Music off"}
+                </button>
+              )}
+
             </div>
           </motion.section>
         ) : (
