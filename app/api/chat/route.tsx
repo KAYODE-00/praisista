@@ -20,8 +20,8 @@ export async function POST(req: NextRequest) {
   const session = await getViewer(req);
   if (!session) return NextResponse.json({ error: "Sign in to send a message." }, { status: 401 });
   const body = await req.json().catch(() => null) as { content?: unknown; aiEnabled?: unknown } | null;
-  const content = typeof body?.content === "string" ? body.content.trim().slice(0, 1000) : "";
-  if (!content) return NextResponse.json({ error: "Message cannot be empty." }, { status: 400 });
+  const content = typeof body?.content === "string" ? body.content : "";
+  if (!content.trim()) return NextResponse.json({ error: "Message cannot be empty." }, { status: 400 });
 
   const message = await saveGroupMessage({ authorId: session.user.id, authorName: session.user.name || "Guest", role: "user", content });
   let aiMessage = null;
