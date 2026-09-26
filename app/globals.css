@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #241611;
+  --frosting: #ffb4c6;
+  --frosting-deep: #ff8aa8;
+  --cream: #fff6ea;
+  --caramel: #d98a4b;
+  --choc: #4a2c1d;
+  --gold: #ffcf7a;
+}
+
+* { box-sizing: border-box; }
+
+html, body { min-height: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--cream);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button { -webkit-tap-highlight-color: transparent; }
+
+::selection {
+  background: rgba(255, 138, 168, .35);
+  color: white;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: .25; }
+  50% { transform: translateY(-30px) rotate(8deg); opacity: .8; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 25px rgba(255,138,168,.15); }
+  50% { box-shadow: 0 0 55px rgba(255,138,168,.35); }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-120%); }
+  100% { transform: translateX(120%); }
+}
+
+.noise {
+  background-image: radial-gradient(rgba(255,255,255,.06) 1px, transparent 1px);
+  background-size: 18px 18px;
+}

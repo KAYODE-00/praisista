@@ -1,0 +1,31 @@
+
+> birthday-experience@1.0.0 dev
+> next dev
+
+   ▲ Next.js 15.5.26
+   - Local:        http://localhost:3000
+   - Network:      http://10.95.192.1:3000
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 5.6s
+ ○ Compiling / ...
+ ✓ Compiled / in 15.8s (1431 modules)
+ GET / 200 in 17202ms
+ ○ Compiling /room ...
+ ✓ Compiled /room in 3.1s (1535 modules)
+ GET /room 200 in 3508ms
+ GET /room 200 in 177ms
+ GET /room 200 in 190ms
+ GET /room 200 in 127ms
+ GET /room 200 in 104ms
+ ○ Compiling /api/auth/[...all] ...
+ ✓ Compiled /api/auth/[...all] in 4.9s (2159 modules)
+2026-09-26T03:07:58.522Z ERROR [Better Auth]: Could not validate the database schema. Check your database connection.
+[Error: getaddrinfo ENOTFOUND base] {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'base'
+}
+ GET /api/auth/get-session 500 in 9313ms
