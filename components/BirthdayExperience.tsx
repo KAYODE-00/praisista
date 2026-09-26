@@ -128,17 +128,24 @@ function FloatingTreats() {
   );
 }
 
-export default function BirthdayExperience() {
+export default function BirthdayExperience({ isAdmin = false }: { isAdmin?: boolean }) {
   const [now, setNow] = useState(getClockNow);
   const [entered, setEntered] = useState(false);
   const [soundOn, setSoundOn] = useState(true);
   const [showMessage, setShowMessage] = useState(false);
   const [showChat, setShowChat] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [texts, setTexts] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    fetch("/api/texts").then((r) => r.json()).then((d) => setTexts(d.texts ?? {})).catch(() => {});
+  }, []);
+
+  const t = (key: string, fallback: string) => texts[key] ?? fallback;
 
   const target = getBirthdayTarget(now);
   const isBirthday =
-    now.getMonth() === BIRTHDAY_MONTH && now.getDate() === BIRTHDAY_DAY;
+    isAdmin || (now.getMonth() === BIRTHDAY_MONTH && now.getDate() === BIRTHDAY_DAY);
 
   useEffect(() => {
     const timer = setInterval(() => setNow(getClockNow()), 1000);
@@ -215,7 +222,7 @@ export default function BirthdayExperience() {
                 transition={{ delay: 0.2 }}
                 className="mb-3 text-xs uppercase tracking-[.35em] text-[var(--gold)]/70"
               >
-                A birthday moment, waiting
+                {t("locked_subtitle", "A birthday moment, waiting")}
               </motion.p>
 
               <motion.h1
@@ -224,7 +231,7 @@ export default function BirthdayExperience() {
                 transition={{ delay: 0.3 }}
                 className="text-4xl font-semibold tracking-tight sm:text-6xl"
               >
-                {isBirthday ? "It's finally time." : "Not quite yet…"}
+                {isBirthday ? t("locked_title_birthday", "It's finally time.") : t("locked_title_waiting", "Not quite yet…")}
               </motion.h1>
 
               <motion.p
@@ -234,8 +241,8 @@ export default function BirthdayExperience() {
                 className="mx-auto mt-5 max-w-md text-sm leading-7 text-white/55"
               >
                 {isBirthday
-                  ? "Someone has been waiting to show you something."
-                  : "Come back when the clock reaches September 27. Something made especially for you will be waiting."}
+                  ? t("locked_description_birthday", "Someone has been waiting to show you something.")
+                  : t("locked_description_waiting", "Come back when the clock reaches September 27. Something made especially for you will be waiting.")}
               </motion.p>
 
               {!isBirthday && (
@@ -278,7 +285,7 @@ export default function BirthdayExperience() {
                 >
                   <span className="absolute inset-0 -translate-x-full bg-white/20 transition-transform duration-700 group-hover:translate-x-full" />
                   <Sparkles size={17} />
-                  Enter your birthday space
+                  {t("enter_button", "Enter your birthday space")}
                   <ArrowRight
                     size={17}
                     className="transition-transform group-hover:translate-x-1"
@@ -319,7 +326,7 @@ export default function BirthdayExperience() {
                 transition={{ delay: 0.35 }}
                 className="text-xs uppercase tracking-[.4em] text-[var(--gold)]/70"
               >
-                September 27 ✨
+                {t("birthday_date_label", "September 27 ✨")}
               </motion.p>
 
               <motion.h1
@@ -328,10 +335,10 @@ export default function BirthdayExperience() {
                 transition={{ delay: 0.5, duration: 0.8 }}
                 className="mt-5 text-5xl font-semibold leading-[.95] tracking-tight sm:text-7xl"
               >
-                Happy Birthday
+                {t("birthday_title_line1", "Happy Birthday")}
                 <br />
                 <span className="bg-gradient-to-r from-[var(--cream)] via-[var(--gold)] to-[var(--frosting)] bg-clip-text text-transparent">
-                  beautiful.
+                  {t("birthday_title_line2", "beautiful.")}
                 </span>
               </motion.h1>
 
@@ -341,8 +348,7 @@ export default function BirthdayExperience() {
                 transition={{ delay: 1 }}
                 className="mx-auto mt-7 max-w-lg text-sm leading-7 text-white/55"
               >
-                I made this little corner of the internet just for you. There
-                are a few things waiting for you inside.
+                {t("birthday_subtitle", "I made this little corner of the internet just for you. There are a few things waiting for you inside.")}
               </motion.p>
 
               <motion.div
@@ -356,7 +362,7 @@ export default function BirthdayExperience() {
                     onClick={() => setShowMessage(true)}
                     className="group inline-flex items-center gap-3 rounded-full border border-[var(--frosting)]/30 bg-[var(--frosting)]/10 px-6 py-3 text-sm text-[var(--cream)] backdrop-blur transition hover:bg-[var(--frosting)]/20"
                   >
-                    There's something I want you to see
+                    {t("show_message_button", "There's something I want you to see")}
                     <ArrowRight
                       size={16}
                       className="transition-transform group-hover:translate-x-1"
@@ -390,13 +396,11 @@ export default function BirthdayExperience() {
                     <div className="mb-4 flex items-center gap-2 text-[var(--gold)]">
                       <PartyPopper size={16} />
                       <span className="text-xs uppercase tracking-[.25em]">
-                        A little note
+                        {t("birthday_note_title", "A little note")}
                       </span>
                     </div>
                     <p className="text-sm leading-7 text-white/70">
-                      I hope today gives you plenty of reasons to smile. You
-                      deserve a beautiful day, beautiful memories, and people
-                      who genuinely appreciate having you around. ❤️
+                      {t("birthday_note_body", "I hope today gives you plenty of reasons to smile. You deserve a beautiful day, beautiful memories, and people who genuinely appreciate having you around. ❤️")}
                     </p>
                     <Gallery />
                     <button

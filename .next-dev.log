@@ -1519,3 +1519,242 @@ Require stack:
  ✓ Compiled in 2.3s (2468 modules)
    Reload env: .env
  ✓ Compiled in 6.8s (2468 modules)
+ GET /room 200 in 332ms
+ ✓ Compiled /api/auth/[...all] in 438ms (1631 modules)
+ ✓ Compiled (1633 modules)
+ ⨯ Error: Cannot find module './873.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\app\api\auth\[...all]\route.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\app\icon\route.js:1:8233)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\app\icon\route.js:1:8282) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array],
+  page: '/icon'
+}
+ ○ Compiling /_error ...
+ ⨯ [Error: Cannot find module './vendor-chunks/@better-auth.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\app\api\auth\[...all]\route.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\dev\static-paths-worker.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\compiled\jest-worker\processChild.js] {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array],
+  page: '/api/auth/get-session'
+}
+ ✓ Compiled /_error in 4.8s (2584 modules)
+ ⨯ Error: Cannot find module './611.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:325)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:371) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ ⨯ Error: Cannot find module './611.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:325)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:371) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+[TypeError: Cannot read properties of undefined (reading '/_app')]
+[TypeError: Cannot read properties of undefined (reading '/_app')]
+ ⨯ [TypeError: Cannot read properties of undefined (reading '/_app')]
+ ⨯ [TypeError: Cannot read properties of undefined (reading '/_app')]
+Error: Cannot find module './873.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\app\api\auth\[...all]\route.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\app\icon\route.js:1:8233)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\app\icon\route.js:1:8282) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array],
+  page: '/icon'
+}
+[Error: Cannot find module './vendor-chunks/@better-auth.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\app\api\auth\[...all]\route.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\dev\static-paths-worker.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\compiled\jest-worker\processChild.js] {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array],
+  page: '/api/auth/get-session'
+}
+ ⨯ Error: Cannot find module './611.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:325)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:371) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ ⨯ Error: Cannot find module './611.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:325)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:371) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+[TypeError: Cannot read properties of undefined (reading '/_app')]
+[TypeError: Cannot read properties of undefined (reading '/_app')]
+ ⨯ [TypeError: Cannot read properties of undefined (reading '/_app')]
+ ⨯ [TypeError: Cannot read properties of undefined (reading '/_app')]
+[TypeError: Cannot read properties of undefined (reading '/_app')]
+[TypeError: Cannot read properties of undefined (reading '/_app')]
+ GET /icon?7d39fcedceeb5350 500 in 12088ms
+ GET /icon?7d39fcedceeb5350= 500 in 104ms
+ GET /api/auth/get-session 500 in 12067ms
+ GET /api/auth/get-session 500 in 104ms
+ ○ Compiling /forgot-password ...
+ ✓ Compiled /forgot-password in 2s (2580 modules)
+ GET /forgot-password 200 in 2310ms
+ ⨯ [Error: Cannot find module './vendor-chunks/@better-auth.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\app\api\auth\[...all]\route.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\dev\static-paths-worker.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\compiled\jest-worker\processChild.js] {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array],
+  page: '/api/auth/get-session'
+}
+ ⨯ Error: Cannot find module './611.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\app\forgot-password\page.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:325)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:371) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+[TypeError: Cannot read properties of undefined (reading '/_app')]
+ ⨯ [TypeError: Cannot read properties of undefined (reading '/_app')]
+[Error: Cannot find module './vendor-chunks/@better-auth.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\app\api\auth\[...all]\route.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\dev\static-paths-worker.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\compiled\jest-worker\processChild.js] {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array],
+  page: '/api/auth/get-session'
+}
+ ⨯ Error: Cannot find module './611.js'
+Require stack:
+- C:\Users\Admin\Downloads\praisista\.next\server\webpack-runtime.js
+- C:\Users\Admin\Downloads\praisista\.next\server\app\forgot-password\page.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\require.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\load-components.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\utils.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\options.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\swc\index.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\parse-module.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\build\analysis\get-page-static-info.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Admin\Downloads\praisista\node_modules\next\dist\server\lib\start-server.js
+    at <unknown> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:325)
+    at Object.<anonymous> (C:\Users\Admin\Downloads\praisista\.next\server\pages\_document.js:1:371) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+[TypeError: Cannot read properties of undefined (reading '/_app')]
+ ⨯ [TypeError: Cannot read properties of undefined (reading '/_app')]
+[TypeError: Cannot read properties of undefined (reading '/_app')]
+ GET /api/auth/get-session 500 in 1577ms
+ GET /api/auth/get-session 500 in 66ms

@@ -57,3 +57,20 @@ export async function saveGroupMessage(input: { authorId: string; authorName: st
   const row = rows[0];
   return { id: Number(row.id), authorName: String(row.author_name), role: row.role === "assistant" ? "assistant" : "user", content: String(row.content), createdAt: new Date(String(row.created_at)).toISOString() } as GroupMessage;
 }
+
+export async function deleteGroupMessage(id: number): Promise<boolean> {
+  await ensureChatSchema();
+  const sql = getSql();
+  const rows = await sql`
+    DELETE FROM birthday_group_messages WHERE id = ${id} RETURNING id
+  `;
+  return rows.length > 0;
+}
+
+export async function deleteAllGroupMessages(): Promise<void> {
+  await ensureChatSchema();
+  const sql = getSql();
+  await sql`
+    DELETE FROM birthday_group_messages
+  `;
+}

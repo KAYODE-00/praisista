@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { getBirthdayAIResponse } from "@/lib/ai";
-import { listGroupMessages, saveGroupMessage } from "@/lib/db";
+import { listGroupMessages, saveGroupMessage, deleteGroupMessage, deleteAllGroupMessages } from "@/lib/db";
+import { requireAdmin } from "@/lib/admin";
 
 export const runtime = "nodejs";
 
@@ -34,4 +35,18 @@ export async function POST(req: NextRequest) {
     aiMessage = await saveGroupMessage({ authorId: "birthday-magic", authorName: "A little magic", role: "assistant", content: reply });
   }
   return NextResponse.json({ message, aiMessage });
+}
+
+export async function DELETE(req: NextRequest) {
+  if (!await requireAdmin(req.headers)) return NextResponse.json({ error: "Admin access required." }, { status: 403 });
+  const url = new URL(req.url);
+  if (url.searchParams.get("all") === "true") {
+    await deleteAllGroupMessages();
+    return NextResponse.json({ ok: true });
+  }
+  const id = Number(url.searchParams.get("id"));
+  if (!Number.isInteger(id)) return NextResponse.json({ error: "Invalid message ID." }, { status: 400 });
+  const deleted = await deleteGroupMessage(id);
+  if (!deleted) return NextResponse.json({ error: "Message not found." }, { status: 404 });
+  return NextResponse.json({ ok: true });
 }
