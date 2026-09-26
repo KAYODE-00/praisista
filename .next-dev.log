@@ -619,3 +619,23 @@ Import trace for requested module:
  GET /room 200 in 681ms
  GET /room 200 in 119ms
  GET /room 200 in 116ms
+ ○ Compiling /api/auth/[...all] ...
+ ✓ Compiled /api/auth/[...all] in 1835ms (1618 modules)
+ GET /room 200 in 2870ms
+ GET /room 200 in 2876ms
+ GET /room 200 in 222ms
+ GET /room 200 in 1070ms
+ GET /api/auth/get-session 200 in 8945ms
+ ○ Compiling /icon ...
+ ✓ Compiled /icon in 883ms (1633 modules)
+ GET /icon?7c0e0aa7205e44b7 200 in 1878ms
+ GET /api/auth/get-session 200 in 4929ms
+ GET /icon?7c0e0aa7205e44b7 200 in 66ms
+ ○ Compiling /api/gallery ...
+ ✓ Compiled /api/gallery in 7.6s (1637 modules)
+ GET /api/gallery 200 in 10563ms
+ GET /api/gallery 200 in 298ms
+ ✓ Compiled in 5s (2487 modules)
+ GET /room 200 in 446ms
+ GET /room 200 in 143ms
+ GET /room 200 in 209ms
